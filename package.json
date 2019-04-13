@@ -1,0 +1,30 @@
+{
+  "name": "codegen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@angular/common": "^7.2.10",
+    "@angular/core": "^7.2.10",
+    "@angular/http": "^7.2.10",
+    "@angular/platform-browser": "^7.2.10",
+    "@ngrx/effects": "^7.3.0",
+    "@ngrx/store": "^7.3.0",
+    "rxjs": "^6.4.0",
+    "swagger-angular-generator": "^4.0.0",
+    "zone.js": "^0.8.29"
+  },
+  "devDependencies": {
+    "ng-swagger-gen": "^1.7.0-b",
+    "swagger-ts-generator": "^1.1.56",
+    "swagger-typescript-codegen": "^1.9.9",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",   
+     "generate": "swagger-angular-generator -s swagger/swagger.json -d clients/swagger-angular-generator"
+  },
+  "author": "",
+  "license": "ISC"
+}
