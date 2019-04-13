@@ -18,51 +18,313 @@ export type ConfigureRequestHandler = (agent: SuperAgentRequest) => SuperAgentRe
 
 export type CallbackHandler = (err: any, res ? : request.Response) => void;
 
-export type Order = {
-    'id' ? : number;
-    'petId' ? : number;
-    'quantity' ? : number;
-    'shipDate' ? : string;
-    'status' ? : "placed" | "approved" | "delivered";
-    'complete' ? : boolean;
+export type ActivityListModel = {
+    'activities' ? : Array < ActivityListItemModel >
+    ;
+    'operatorId' ? : number;
+    'reasonId' ? : number;
+    'clientTypeId' ? : number;
+    'articleTypeId' ? : number;
+    'filterDate' ? : string;
+    'onlyActive' ? : boolean;
+    'filter' ? : string;
+    'formAction' ? : string;
+    'itemsPerPage' ? : number;
+    'itemsCount' ? : number;
+    'pageIndex' ? : number;
+    'pageCount' ? : number;
+    'newSort' ? : string;
 };
 
-export type User = {
+export type ActivityListItemModel = {
     'id' ? : number;
-    'username' ? : string;
+    'code' ? : string;
+    'name' ? : string;
+    'reasonId' ? : number;
+    'reasonName' ? : string;
+    'customerTypeId' ? : number;
+    'customerTypeName' ? : string;
+    'articleTypeId' ? : number;
+    'articleTypeName' ? : string;
+    'start' ? : string;
+    'end' ? : string;
+};
+
+export type ActivityItemModel = {
+    'id' ? : number;
+    'code' ? : string;
+    'name' ? : string;
+    'reasonId' ? : number;
+    'reasonName' ? : string;
+    'customerTypeId' ? : number;
+    'customerTypeName' ? : string;
+    'articleTypeId' ? : number;
+    'articleTypeName' ? : string;
+    'users' ? : Array < UserAsignationModel >
+    ;
+    'customFields' ? : Array < CustomFieldItemModel >
+    ;
+    'startDate' ? : string;
+    'endDate' ? : string;
+};
+
+export type UserAsignationModel = {
+    'asignationId' ? : number;
     'firstName' ? : string;
     'lastName' ? : string;
-    'email' ? : string;
-    'password' ? : string;
-    'phone' ? : string;
-    'userStatus' ? : number;
+    'fullName' ? : string;
+    'userId' ? : number;
+    'userName' ? : string;
 };
 
-export type Category = {
+export type CustomFieldItemModel = {
     'id' ? : number;
     'name' ? : string;
+    'dataType' ? : string;
+    'mandatory' ? : boolean;
+    'help' ? : string;
+    'code' ? : string;
+    'order' ? : number;
 };
 
-export type Tag = {
-    'id' ? : number;
-    'name' ? : string;
-};
-
-export type Pet = {
-    'id' ? : number;
-    'category' ? : Category;
-    'name': string;
-    'photoUrls': Array < string >
-    ;
-    'tags' ? : Array < Tag >
-    ;
-    'status' ? : "available" | "pending" | "sold";
-};
-
-export type ApiResponse = {
-    'code' ? : number;
-    'type' ? : string;
+export type ApiSuccessResponseOfActivityItemModel = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
     'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : ActivityItemModel;
+};
+
+export type ActivityDataCloseModel = {
+    'userId' ? : number;
+    'userName' ? : string;
+    'activityDataId' ? : number;
+    'controlResponses' ? : Array < ControlResponse >
+    ;
+    'projectId' ? : number;
+    'activityName' ? : string;
+    'start' ? : string;
+    'comments' ? : string;
+    'reasonId' ? : number;
+    'reasonName' ? : string;
+    'clientTypeId' ? : number;
+    'clientTypeName' ? : string;
+    'articleTypeId' ? : number;
+    'articleTypeName' ? : string;
+    'controlInfo' ? : ControlInfoData;
+};
+
+export type ControlResponse = {
+    'controlId' ? : number;
+    'dataType' ? : string;
+    'integerValue' ? : number;
+    'stringValue' ? : string;
+    'dateValue' ? : string;
+    'boolValue' ? : boolean;
+    'decimalValue' ? : number;
+    'name' ? : string;
+    'mandatory' ? : boolean;
+    'code' ? : string;
+    'help' ? : string;
+    'order' ? : number;
+};
+
+export type ControlInfoData = {
+    'requestClosingDateTime' ? : boolean;
+    'suggestedClosingDateTime' ? : string;
+    'completed' ? : boolean;
+};
+
+export type ApiSuccessResponseOfActivityDataCloseModel = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : ActivityDataCloseModel;
+};
+
+export type ActivitiyControlsRequest = {
+    'activityTypeId' ? : number;
+    'activityDataId' ? : number;
+};
+
+export type ApiSuccessResponseOfEmpty = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : Empty;
+};
+
+export type Empty = {};
+
+export type ApiSuccessResponseOfString = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : string;
+};
+
+export type ApiSuccessResponseOfProductTypeItemModel = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : ProductTypeItemModel;
+};
+
+export type ProductTypeItemModel = {
+    'id' ? : number;
+    'name' ? : string;
+};
+
+export type ArticleTypeItemModel = {
+    'id' ? : number;
+    'code' ? : string;
+    'name' ? : string;
+    'active' ? : boolean;
+};
+
+export type ApiSuccessResponseOfArticleTypeItemModel = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : ArticleTypeItemModel;
+};
+
+export type ArticleTypeModelList = {
+    'articleTypes' ? : Array < ArticleTypeItemModel >
+    ;
+    'showDeleted' ? : boolean;
+    'filter' ? : string;
+    'formAction' ? : string;
+    'itemsPerPage' ? : number;
+    'itemsCount' ? : number;
+    'pageIndex' ? : number;
+    'pageCount' ? : number;
+    'newSort' ? : string;
+};
+
+export type CustomerTypeModelList = {
+    'showDeleted' ? : boolean;
+    'commercialEntityTypes' ? : Array < CustomerTypeItemModel >
+    ;
+    'filter' ? : string;
+    'formAction' ? : string;
+    'itemsPerPage' ? : number;
+    'itemsCount' ? : number;
+    'pageIndex' ? : number;
+    'pageCount' ? : number;
+    'newSort' ? : string;
+};
+
+export type CustomerTypeItemModel = {
+    'id' ? : number;
+    'name' ? : string;
+    'code' ? : string;
+    'active' ? : boolean;
+};
+
+export type ApiSuccessResponseOfCustomerTypeItemModel = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : CustomerTypeItemModel;
+};
+
+export type ReasonModelList = {
+    'reasons' ? : Array < ReasonItemModel >
+    ;
+    'showDeleted' ? : boolean;
+    'filter' ? : string;
+    'formAction' ? : string;
+    'itemsPerPage' ? : number;
+    'itemsCount' ? : number;
+    'pageIndex' ? : number;
+    'pageCount' ? : number;
+    'newSort' ? : string;
+};
+
+export type ReasonItemModel = {
+    'id' ? : number;
+    'code' ? : string;
+    'name' ? : string;
+    'active' ? : boolean;
+};
+
+export type ApiSuccessResponseOfReasonItemModel = {
+    'modelErrors' ? : {
+        [key: string]: Array < string >
+    };
+    'message' ? : string;
+    'isValid' ? : boolean;
+    'errorCode' ? : string;
+    'notifications' ? : Array < string >
+    ;
+    'errors' ? : Array < string >
+    ;
+    'warnings' ? : Array < string >
+    ;
+    'data' ? : ReasonItemModel;
 };
 
 export type Logger = {
@@ -82,13 +344,13 @@ export interface CommonRequestOptions {
 }
 
 /**
- * This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
+ * Api de gestión de proyectos
  * @class Test
  * @param {(string)} [domainOrOptions] - The project domain.
  */
 export class Test {
 
-    private domain: string = "https://petstore.swagger.io/v2";
+    private domain: string = "";
     private errorHandlers: CallbackHandler[] = [];
     private requestHeadersHandler ? : RequestHeadersHandler;
     private configureAgentHandler ? : ConfigureAgentHandler;
@@ -169,12 +431,12 @@ export class Test {
         });
     }
 
-    addPetURL(parameters: {
-        'body': Pet,
+    GetActivityListURL(parameters: {
+        'listModel' ? : ActivityListModel,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet';
+        let path = '/commercial_entities/activities';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -193,19 +455,19 @@ export class Test {
     }
 
     /**
-     * Add a new pet to the store
+     * 
      * @method
-     * @name Test#addPet
-     * @param {} body - Pet object that needs to be added to the store
+     * @name Test#GetActivityList
+     * @param {} listModel - Api de gestión de proyectos
      */
-    addPet(parameters: {
-        'body': Pet,
+    GetActivityList(parameters: {
+        'listModel' ? : ActivityListModel,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
+    }): Promise < ResponseWithBody < ActivityListModel >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet';
+        let path = '/commercial_entities/activities';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -215,16 +477,11 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-            headers['Content-Type'] = 'application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
 
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
-            }
-
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
-                return;
+            if (parameters['listModel'] !== undefined) {
+                body = parameters['listModel'];
             }
 
             if (parameters.$queryParameters) {
@@ -240,510 +497,12 @@ export class Test {
         });
     }
 
-    updatePetURL(parameters: {
-        'body': Pet,
+    UpdateActivityURL(parameters: {
+        'model' ? : ActivityItemModel,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * Update an existing pet
-     * @method
-     * @name Test#updatePet
-     * @param {} body - Pet object that needs to be added to the store
-     */
-    updatePet(parameters: {
-        'body': Pet,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-            headers['Content-Type'] = 'application/json';
-
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
-            }
-
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('PUT', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    findPetsByStatusURL(parameters: {
-        'status': Array < "available" | "pending" | "sold" >
-            ,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/findByStatus';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        if (parameters['status'] !== undefined) {
-            queryParameters['status'] = parameters['status'];
-        }
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * Multiple status values can be provided with comma separated strings
-     * @method
-     * @name Test#findPetsByStatus
-     * @param {array} status - Status values that need to be considered for filter
-     */
-    findPetsByStatus(parameters: {
-        'status': Array < "available" | "pending" | "sold" >
-            ,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < Array < Pet >>> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/findByStatus';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-
-            if (parameters['status'] !== undefined) {
-                queryParameters['status'] = parameters['status'];
-            }
-
-            if (parameters['status'] === undefined) {
-                reject(new Error('Missing required  parameter: status'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    getPetByIdURL(parameters: {
-        'petId': number,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{petId}', `${parameters['petId']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * Returns a single pet
-     * @method
-     * @name Test#getPetById
-     * @param {integer} petId - ID of pet to return
-     */
-    getPetById(parameters: {
-        'petId': number,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < Pet >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-
-            path = path.replace('{petId}', `${parameters['petId']}`);
-
-            if (parameters['petId'] === undefined) {
-                reject(new Error('Missing required  parameter: petId'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    updatePetWithFormURL(parameters: {
-        'petId': number,
-        'name' ? : string,
-        'status' ? : string,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{petId}', `${parameters['petId']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        queryParameters = {};
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * Updates a pet in the store with form data
-     * @method
-     * @name Test#updatePetWithForm
-     * @param {integer} petId - ID of pet that needs to be updated
-     * @param {string} name - Updated name of the pet
-     * @param {string} status - Updated status of the pet
-     */
-    updatePetWithForm(parameters: {
-        'petId': number,
-        'name' ? : string,
-        'status' ? : string,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-            headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
-            path = path.replace('{petId}', `${parameters['petId']}`);
-
-            if (parameters['petId'] === undefined) {
-                reject(new Error('Missing required  parameter: petId'));
-                return;
-            }
-
-            if (parameters['name'] !== undefined) {
-                form['name'] = parameters['name'];
-            }
-
-            if (parameters['status'] !== undefined) {
-                form['status'] = parameters['status'];
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            form = queryParameters;
-            queryParameters = {};
-
-            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    deletePetURL(parameters: {
-        'apiKey' ? : string,
-        'petId': number,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{petId}', `${parameters['petId']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * Deletes a pet
-     * @method
-     * @name Test#deletePet
-     * @param {string} apiKey - This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
-     * @param {integer} petId - Pet id to delete
-     */
-    deletePet(parameters: {
-        'apiKey' ? : string,
-        'petId': number,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-
-            if (parameters['apiKey'] !== undefined) {
-                headers['api_key'] = parameters['apiKey'];
-            }
-
-            path = path.replace('{petId}', `${parameters['petId']}`);
-
-            if (parameters['petId'] === undefined) {
-                reject(new Error('Missing required  parameter: petId'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('DELETE', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    uploadFileURL(parameters: {
-        'petId': number,
-        'additionalMetadata' ? : string,
-        'file' ? : {},
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}/uploadImage';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{petId}', `${parameters['petId']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        queryParameters = {};
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * uploads an image
-     * @method
-     * @name Test#uploadFile
-     * @param {integer} petId - ID of pet to update
-     * @param {string} additionalMetadata - Additional data to pass to server
-     * @param {file} file - file to upload
-     */
-    uploadFile(parameters: {
-        'petId': number,
-        'additionalMetadata' ? : string,
-        'file' ? : {},
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < ApiResponse >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/pet/{petId}/uploadImage';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/json';
-            headers['Content-Type'] = 'multipart/form-data';
-
-            path = path.replace('{petId}', `${parameters['petId']}`);
-
-            if (parameters['petId'] === undefined) {
-                reject(new Error('Missing required  parameter: petId'));
-                return;
-            }
-
-            if (parameters['additionalMetadata'] !== undefined) {
-                form['additionalMetadata'] = parameters['additionalMetadata'];
-            }
-
-            if (parameters['file'] !== undefined) {
-                form['file'] = parameters['file'];
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            form = queryParameters;
-            queryParameters = {};
-
-            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    getInventoryURL(parameters: {} & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/inventory';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * Returns a map of status codes to quantities
-     * @method
-     * @name Test#getInventory
-     */
-    getInventory(parameters: {
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < {
-        [key: string]: number
-    } >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/inventory';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/json';
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    placeOrderURL(parameters: {
-        'body': Order,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/order';
+        let path = '/commercial_entities/activity';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -762,19 +521,19 @@ export class Test {
     }
 
     /**
-     * Place an order for a pet
+     * 
      * @method
-     * @name Test#placeOrder
-     * @param {} body - order placed for purchasing the pet
+     * @name Test#UpdateActivity
+     * @param {} model - Api de gestión de proyectos
      */
-    placeOrder(parameters: {
-        'body': Order,
+    UpdateActivity(parameters: {
+        'model' ? : ActivityItemModel,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < Order >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfActivityItemModel >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/order';
+        let path = '/commercial_entities/activity';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -784,15 +543,11 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
 
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
-            }
-
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
-                return;
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
             }
 
             if (parameters.$queryParameters) {
@@ -808,142 +563,12 @@ export class Test {
         });
     }
 
-    getOrderByIdURL(parameters: {
-        'orderId': number,
+    UpdateActivityDataURL(parameters: {
+        'model' ? : ActivityDataCloseModel,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/order/{orderId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{orderId}', `${parameters['orderId']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
-     * @method
-     * @name Test#getOrderById
-     * @param {integer} orderId - ID of pet that needs to be fetched
-     */
-    getOrderById(parameters: {
-        'orderId': number,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < Order >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/order/{orderId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-
-            path = path.replace('{orderId}', `${parameters['orderId']}`);
-
-            if (parameters['orderId'] === undefined) {
-                reject(new Error('Missing required  parameter: orderId'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    deleteOrderURL(parameters: {
-        'orderId': number,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/order/{orderId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{orderId}', `${parameters['orderId']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
-     * @method
-     * @name Test#deleteOrder
-     * @param {integer} orderId - ID of the order that needs to be deleted
-     */
-    deleteOrder(parameters: {
-        'orderId': number,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/store/order/{orderId}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-
-            path = path.replace('{orderId}', `${parameters['orderId']}`);
-
-            if (parameters['orderId'] === undefined) {
-                reject(new Error('Missing required  parameter: orderId'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('DELETE', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
-
-    createUserURL(parameters: {
-        'body': User,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user';
+        let path = '/commercial_entities/activitydata';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -962,19 +587,19 @@ export class Test {
     }
 
     /**
-     * This can only be done by the logged in user.
+     * 
      * @method
-     * @name Test#createUser
-     * @param {} body - Created user object
+     * @name Test#UpdateActivityData
+     * @param {} model - Api de gestión de proyectos
      */
-    createUser(parameters: {
-        'body': User,
+    UpdateActivityData(parameters: {
+        'model' ? : ActivityDataCloseModel,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfActivityDataCloseModel >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user';
+        let path = '/commercial_entities/activitydata';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -984,15 +609,11 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
 
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
-            }
-
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
-                return;
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
             }
 
             if (parameters.$queryParameters) {
@@ -1008,13 +629,12 @@ export class Test {
         });
     }
 
-    createUsersWithArrayInputURL(parameters: {
-        'body': Array < User >
-            ,
+    DeleteActivityURL(parameters: {
+        'model' ? : ActivitiyControlsRequest,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/createWithArray';
+        let path = '/commercial_entities/activity/delete';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1033,20 +653,19 @@ export class Test {
     }
 
     /**
-     * Creates list of users with given input array
+     * 
      * @method
-     * @name Test#createUsersWithArrayInput
-     * @param {} body - List of user object
+     * @name Test#DeleteActivity
+     * @param {} model - Api de gestión de proyectos
      */
-    createUsersWithArrayInput(parameters: {
-        'body': Array < User >
-            ,
+    DeleteActivity(parameters: {
+        'model' ? : ActivitiyControlsRequest,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfEmpty >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/createWithArray';
+        let path = '/commercial_entities/activity/delete';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1056,15 +675,11 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
 
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
-            }
-
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
-                return;
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
             }
 
             if (parameters.$queryParameters) {
@@ -1080,13 +695,12 @@ export class Test {
         });
     }
 
-    createUsersWithListInputURL(parameters: {
-        'body': Array < User >
-            ,
+    DeleteActivityDataURL(parameters: {
+        'model' ? : ActivitiyControlsRequest,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/createWithList';
+        let path = '/commercial_entities/activitydata/delete';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1105,20 +719,19 @@ export class Test {
     }
 
     /**
-     * Creates list of users with given input array
+     * 
      * @method
-     * @name Test#createUsersWithListInput
-     * @param {} body - List of user object
+     * @name Test#DeleteActivityData
+     * @param {} model - Api de gestión de proyectos
      */
-    createUsersWithListInput(parameters: {
-        'body': Array < User >
-            ,
+    DeleteActivityData(parameters: {
+        'model' ? : ActivitiyControlsRequest,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfString >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/createWithList';
+        let path = '/commercial_entities/activitydata/delete';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1128,14 +741,279 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
 
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
             }
 
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetActivityURL(parameters: {
+        'entityId': number,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/activity/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#GetActivity
+     * @param {integer} entityId - Api de gestión de proyectos
+     */
+    GetActivity(parameters: {
+        'entityId': number,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfActivityItemModel >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/activity/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
+
+            path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+            if (parameters['entityId'] === undefined) {
+                reject(new Error('Missing required  parameter: entityId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetActivityWithUsersURL(parameters: {
+        'entityId': number,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/activity/withusers/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#GetActivityWithUsers
+     * @param {integer} entityId - Api de gestión de proyectos
+     */
+    GetActivityWithUsers(parameters: {
+        'entityId': number,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfActivityItemModel >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/activity/withusers/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
+
+            path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+            if (parameters['entityId'] === undefined) {
+                reject(new Error('Missing required  parameter: entityId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetArticleTypeURL(parameters: {
+        'entityId': number,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/articletype/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#GetArticleType
+     * @param {integer} entityId - Api de gestión de proyectos
+     */
+    GetArticleType(parameters: {
+        'entityId': number,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfProductTypeItemModel >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/articletype/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
+
+            path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+            if (parameters['entityId'] === undefined) {
+                reject(new Error('Missing required  parameter: entityId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    DeleteArticleTypeURL(parameters: {
+        'articleTypeId': number,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/articleType/{articleTypeId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        path = path.replace('{articleTypeId}', `${parameters['articleTypeId']}`);
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#DeleteArticleType
+     * @param {integer} articleTypeId - Api de gestión de proyectos
+     */
+    DeleteArticleType(parameters: {
+        'articleTypeId': number,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfEmpty >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/articleType/{articleTypeId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
+
+            path = path.replace('{articleTypeId}', `${parameters['articleTypeId']}`);
+
+            if (parameters['articleTypeId'] === undefined) {
+                reject(new Error('Missing required  parameter: articleTypeId'));
                 return;
             }
 
@@ -1152,24 +1030,281 @@ export class Test {
         });
     }
 
-    loginUserURL(parameters: {
-        'username': string,
-        'password': string,
+    UpdateArticleTypeURL(parameters: {
+        'model' ? : ArticleTypeItemModel,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/login';
+        let path = '/commercial_entities/articleType';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
 
-        if (parameters['username'] !== undefined) {
-            queryParameters['username'] = parameters['username'];
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
         }
 
-        if (parameters['password'] !== undefined) {
-            queryParameters['password'] = parameters['password'];
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#UpdateArticleType
+     * @param {} model - Api de gestión de proyectos
+     */
+    UpdateArticleType(parameters: {
+        'model' ? : ArticleTypeItemModel,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfArticleTypeItemModel >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/articleType';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
+
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetProductTypesURL(parameters: {
+        'model' ? : ArticleTypeModelList,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/producttypes';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#GetProductTypes
+     * @param {} model - Api de gestión de proyectos
+     */
+    GetProductTypes(parameters: {
+        'model' ? : ArticleTypeModelList,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ArticleTypeModelList >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/producttypes';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
+
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetEntityTypeListURL(parameters: {
+        'model' ? : CustomerTypeModelList,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/entitytypes';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#GetEntityTypeList
+     * @param {} model - Api de gestión de proyectos
+     */
+    GetEntityTypeList(parameters: {
+        'model' ? : CustomerTypeModelList,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < CustomerTypeModelList >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/entitytypes';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
+
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    UpdateEntityTypeURL(parameters: {
+        'model' ? : CustomerTypeItemModel,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/entitytype';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#UpdateEntityType
+     * @param {} model - Api de gestión de proyectos
+     */
+    UpdateEntityType(parameters: {
+        'model' ? : CustomerTypeItemModel,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfCustomerTypeItemModel >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/entitytype';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
+
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetEntityTypeURL(parameters: {
+        'entityId': number,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/entitytype/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        path = path.replace('{entityId}', `${parameters['entityId']}`);
 
         if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
             queryParameters = {
@@ -1183,21 +1318,19 @@ export class Test {
     }
 
     /**
-     * Logs user into the system
+     * 
      * @method
-     * @name Test#loginUser
-     * @param {string} username - The user name for login
-     * @param {string} password - The password for login in clear text
+     * @name Test#GetEntityType
+     * @param {integer} entityId - Api de gestión de proyectos
      */
-    loginUser(parameters: {
-        'username': string,
-        'password': string,
+    GetEntityType(parameters: {
+        'entityId': number,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < string >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfCustomerTypeItemModel >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/login';
+        let path = '/commercial_entities/entitytype/{entityId}';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1207,23 +1340,13 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
 
-            if (parameters['username'] !== undefined) {
-                queryParameters['username'] = parameters['username'];
-            }
+            path = path.replace('{entityId}', `${parameters['entityId']}`);
 
-            if (parameters['username'] === undefined) {
-                reject(new Error('Missing required  parameter: username'));
-                return;
-            }
-
-            if (parameters['password'] !== undefined) {
-                queryParameters['password'] = parameters['password'];
-            }
-
-            if (parameters['password'] === undefined) {
-                reject(new Error('Missing required  parameter: password'));
+            if (parameters['entityId'] === undefined) {
+                reject(new Error('Missing required  parameter: entityId'));
                 return;
             }
 
@@ -1237,13 +1360,154 @@ export class Test {
         });
     }
 
-    logoutUserURL(parameters: {} & CommonRequestOptions): string {
+    DeleteCustomerTypeURL(parameters: {
+        'entityId': number,
+    } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/logout';
+        let path = '/commercial_entities/clienttype/{entityId}';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
+
+        path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#DeleteCustomerType
+     * @param {integer} entityId - Api de gestión de proyectos
+     */
+    DeleteCustomerType(parameters: {
+        'entityId': number,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfEmpty >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/clienttype/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
+
+            path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+            if (parameters['entityId'] === undefined) {
+                reject(new Error('Missing required  parameter: entityId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetReasonsURL(parameters: {
+        'model' ? : ReasonModelList,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/reasons';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
+            queryParameters = {
+                ...queryParameters,
+                ...parameters.$queryParameters
+            }
+        }
+
+        queryParameters = {};
+
+        let keys = Object.keys(queryParameters);
+        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    }
+
+    /**
+     * 
+     * @method
+     * @name Test#GetReasons
+     * @param {} model - Api de gestión de proyectos
+     */
+    GetReasons(parameters: {
+        'model' ? : ReasonModelList,
+        $queryParameters ? : any,
+        $domain ? : string,
+        $path ? : string | ((path: string) => string)
+    }): Promise < ResponseWithBody < ReasonModelList >> {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/reasons';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise((resolve, reject) => {
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
+
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+                });
+            }
+
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
+        });
+    }
+
+    GetReasonURL(parameters: {
+        'entityId': number,
+    } & CommonRequestOptions): string {
+        let queryParameters: any = {};
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        let path = '/commercial_entities/reason/{entityId}';
+        if (parameters.$path) {
+            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
+        }
+
+        path = path.replace('{entityId}', `${parameters['entityId']}`);
 
         if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
             queryParameters = {
@@ -1257,17 +1521,19 @@ export class Test {
     }
 
     /**
-     * Logs out current logged in user session
+     * 
      * @method
-     * @name Test#logoutUser
+     * @name Test#GetReason
+     * @param {integer} entityId - Api de gestión de proyectos
      */
-    logoutUser(parameters: {
+    GetReason(parameters: {
+        'entityId': number,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfReasonItemModel >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/logout';
+        let path = '/commercial_entities/reason/{entityId}';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1277,7 +1543,15 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
+
+            path = path.replace('{entityId}', `${parameters['entityId']}`);
+
+            if (parameters['entityId'] === undefined) {
+                reject(new Error('Missing required  parameter: entityId'));
+                return;
+            }
 
             if (parameters.$queryParameters) {
                 Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
@@ -1289,17 +1563,17 @@ export class Test {
         });
     }
 
-    getUserByNameURL(parameters: {
-        'username': string,
+    DeleteReasonURL(parameters: {
+        'reasonId': number,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/{username}';
+        let path = '/commercial_entities/reason/{reasonId}';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
 
-        path = path.replace('{username}', `${parameters['username']}`);
+        path = path.replace('{reasonId}', `${parameters['reasonId']}`);
 
         if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
             queryParameters = {
@@ -1308,24 +1582,26 @@ export class Test {
             }
         }
 
+        queryParameters = {};
+
         let keys = Object.keys(queryParameters);
         return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
     }
 
     /**
-     * Get user by user name
+     * 
      * @method
-     * @name Test#getUserByName
-     * @param {string} username - The name that needs to be fetched. Use user1 for testing. 
+     * @name Test#DeleteReason
+     * @param {integer} reasonId - Api de gestión de proyectos
      */
-    getUserByName(parameters: {
-        'username': string,
+    DeleteReason(parameters: {
+        'reasonId': number,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < User >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfEmpty >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/{username}';
+        let path = '/commercial_entities/reason/{reasonId}';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1335,12 +1611,13 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = '';
 
-            path = path.replace('{username}', `${parameters['username']}`);
+            path = path.replace('{reasonId}', `${parameters['reasonId']}`);
 
-            if (parameters['username'] === undefined) {
-                reject(new Error('Missing required  parameter: username'));
+            if (parameters['reasonId'] === undefined) {
+                reject(new Error('Missing required  parameter: reasonId'));
                 return;
             }
 
@@ -1350,22 +1627,22 @@ export class Test {
                 });
             }
 
-            this.request('GET', domain + path, body, headers, queryParameters, form, reject, resolve);
+            form = queryParameters;
+            queryParameters = {};
+
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
         });
     }
 
-    updateUserURL(parameters: {
-        'username': string,
-        'body': User,
+    UpdateReasonURL(parameters: {
+        'model' ? : ReasonItemModel,
     } & CommonRequestOptions): string {
         let queryParameters: any = {};
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/{username}';
+        let path = '/commercial_entities/reason';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
-
-        path = path.replace('{username}', `${parameters['username']}`);
 
         if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
             queryParameters = {
@@ -1374,26 +1651,26 @@ export class Test {
             }
         }
 
+        queryParameters = {};
+
         let keys = Object.keys(queryParameters);
         return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
     }
 
     /**
-     * This can only be done by the logged in user.
+     * 
      * @method
-     * @name Test#updateUser
-     * @param {string} username - name that need to be updated
-     * @param {} body - Updated user object
+     * @name Test#UpdateReason
+     * @param {} model - Api de gestión de proyectos
      */
-    updateUser(parameters: {
-        'username': string,
-        'body': User,
+    UpdateReason(parameters: {
+        'model' ? : ReasonItemModel,
         $queryParameters ? : any,
         $domain ? : string,
         $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
+    }): Promise < ResponseWithBody < ApiSuccessResponseOfReasonItemModel >> {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/{username}';
+        let path = '/commercial_entities/reason';
         if (parameters.$path) {
             path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
         }
@@ -1403,22 +1680,11 @@ export class Test {
         let headers: any = {};
         let form: any = {};
         return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
+            headers['Accept'] = 'text/plain, application/json, text/json';
+            headers['Content-Type'] = 'application/json-patch+json';
 
-            path = path.replace('{username}', `${parameters['username']}`);
-
-            if (parameters['username'] === undefined) {
-                reject(new Error('Missing required  parameter: username'));
-                return;
-            }
-
-            if (parameters['body'] !== undefined) {
-                body = parameters['body'];
-            }
-
-            if (parameters['body'] === undefined) {
-                reject(new Error('Missing required  parameter: body'));
-                return;
+            if (parameters['model'] !== undefined) {
+                body = parameters['model'];
             }
 
             if (parameters.$queryParameters) {
@@ -1427,72 +1693,10 @@ export class Test {
                 });
             }
 
-            this.request('PUT', domain + path, body, headers, queryParameters, form, reject, resolve);
-        });
-    }
+            form = queryParameters;
+            queryParameters = {};
 
-    deleteUserURL(parameters: {
-        'username': string,
-    } & CommonRequestOptions): string {
-        let queryParameters: any = {};
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/{username}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        path = path.replace('{username}', `${parameters['username']}`);
-
-        if (parameters.$queryParameters !== undefined && parameters.$queryParameters !== null) {
-            queryParameters = {
-                ...queryParameters,
-                ...parameters.$queryParameters
-            }
-        }
-
-        let keys = Object.keys(queryParameters);
-        return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
-    }
-
-    /**
-     * This can only be done by the logged in user.
-     * @method
-     * @name Test#deleteUser
-     * @param {string} username - The name that needs to be deleted
-     */
-    deleteUser(parameters: {
-        'username': string,
-        $queryParameters ? : any,
-        $domain ? : string,
-        $path ? : string | ((path: string) => string)
-    }): Promise < ResponseWithBody < void >> {
-        const domain = parameters.$domain ? parameters.$domain : this.domain;
-        let path = '/user/{username}';
-        if (parameters.$path) {
-            path = (typeof(parameters.$path) === 'function') ? parameters.$path(path) : parameters.$path;
-        }
-
-        let body: any;
-        let queryParameters: any = {};
-        let headers: any = {};
-        let form: any = {};
-        return new Promise((resolve, reject) => {
-            headers['Accept'] = 'application/xml, application/json';
-
-            path = path.replace('{username}', `${parameters['username']}`);
-
-            if (parameters['username'] === undefined) {
-                reject(new Error('Missing required  parameter: username'));
-                return;
-            }
-
-            if (parameters.$queryParameters) {
-                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-                    queryParameters[parameterName] = parameters.$queryParameters[parameterName];
-                });
-            }
-
-            this.request('DELETE', domain + path, body, headers, queryParameters, form, reject, resolve);
+            this.request('POST', domain + path, body, headers, queryParameters, form, reject, resolve);
         });
     }
 

@@ -1,18 +1,34 @@
 /* tslint:disable:max-line-length */
 /**
- * This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
- * 1.0.0
- * Swagger Petstore
- * http://swagger.io/terms/
- * apiteam@swagger.io
- * Apache 2.0
- * http://www.apache.org/licenses/LICENSE-2.0.html
- * petstore.swagger.io/v2
+ * v1
+ * Proyectos
+ * Api de gestión de proyectos
+ * None
+ * undefined
  */
 
-export * from './defs/Order';
-export * from './defs/User';
-export * from './defs/Category';
-export * from './defs/Tag';
-export * from './defs/Pet';
-export * from './defs/ApiResponse';
+export * from './defs/ActivityListModel';
+export * from './defs/ActivityListItemModel';
+export * from './defs/ActivityItemModel';
+export * from './defs/UserAsignationModel';
+export * from './defs/CustomFieldItemModel';
+export * from './defs/ApiSuccessResponseOfActivityItemModel';
+export * from './defs/ActivityDataCloseModel';
+export * from './defs/ControlResponse';
+export * from './defs/ControlInfoData';
+export * from './defs/ApiSuccessResponseOfActivityDataCloseModel';
+export * from './defs/ActivitiyControlsRequest';
+export * from './defs/ApiSuccessResponseOfEmpty';
+export * from './defs/Empty';
+export * from './defs/ApiSuccessResponseOfString';
+export * from './defs/ApiSuccessResponseOfProductTypeItemModel';
+export * from './defs/ProductTypeItemModel';
+export * from './defs/ArticleTypeItemModel';
+export * from './defs/ApiSuccessResponseOfArticleTypeItemModel';
+export * from './defs/ArticleTypeModelList';
+export * from './defs/CustomerTypeModelList';
+export * from './defs/CustomerTypeItemModel';
+export * from './defs/ApiSuccessResponseOfCustomerTypeItemModel';
+export * from './defs/ReasonModelList';
+export * from './defs/ReasonItemModel';
+export * from './defs/ApiSuccessResponseOfReasonItemModel';

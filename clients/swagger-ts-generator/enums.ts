@@ -6,12 +6,6 @@
 
 // generate enum based on strings instead of numbers
 // (see https://blog.rsuter.com/how-to-implement-an-enum-with-string-values-in-typescript/)
-export enum status {
-    placed = <any>"placed",
-    approved = <any>"approved",
-    delivered = <any>"delivered",
-}
-
 
 /**
  * bundle of all enums for databinding to options, radio-buttons etc.
@@ -41,5 +35,4 @@ export class AllEnums {
         return AllEnums._instance;
     }
 
-    status = status;
 }
